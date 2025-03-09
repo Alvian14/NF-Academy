@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY Biodata</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: justify;
+        }
+
+        img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        h2, h3 {
+            color: #333;
+            text-align: center;
+        }
+        
+        p.description {
+            font-size: 16px;
+            color: #555;
+            font-weight: bold;
+        }
+        
+        table {
+            width: 100%;
+            text-align: left;
+            margin-top: 10px;
+        }
+        
+        td {
+            padding: 5px;
+            font-size: 16px;
+        }
+        
+        .label {
+            font-weight: bold;
+            width: 40%;
+        }
+        
+        .list-container {
+
+            /* list-style: none; */
+            padding-left: 15px;
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Biodata Pribadi</h2>
+        <img src="https://images.harpersbazaar.co.id/unsafe/0x0/smart/media/body_e23f6d7bf4544ed2a705207c0d16bc66.jpeg" alt="Foto Profil">
+        
+        <p class="description"><b>Saya adalah seorang mahasiswa aktif di Politeknik Negeri Jember. Saya ingin menjadi Fullstack Web Developer dan sejauh ini saya menguasai bahasa pemrograman Java, PHP, Dart, dan JavaScript.</b></p>
+        
+        <table>
+            <tr>
+                <td class="label">Nama</td>
+                <td>: Moch Alvian Hidayatulloh</td>
+            </tr>
+            <tr>
+                <td class="label">Tempat, Tanggal Lahir</td>
+                <td>: Nganjuk, 14 Januari 2004</td>
+            </tr>
+            <tr>
+                <td class="label">Jenis Kelamin</td>
+                <td>: Laki-laki</td>
+            </tr>
+            <tr>
+                <td class="label">Status</td>
+                <td>: Mahasiswa</td>
+            </tr>
+            <tr>
+                <td class="label">Jurusan</td>
+                <td>: Teknik Informatika</td>
+            </tr>
+            <tr>
+                <td class="label">Alamat</td>
+                <td>: Jl. Merdeka No. 10, Nganjuk</td>
+            </tr>
+            <tr>
+                <td class="label">Email</td>
+                <td>: alvianhidayat641@gmail.com</td>
+            </tr>
+            <tr>
+                <td class="label">Telepon</td>
+                <td>: 081559769075</td>
+            </tr>
+        </table>
+
+        <h3>Pendidikan</h3>
+        <ul class="list-container">
+            <li>SMK Taruna Bakti Kertosono</li>
+        </ul>
+
+        <h3>Project Kampus</h3>
+        <ul class="list-container">
+            <li>Membuat Website (Unjuk) untuk Dinas UMKM Nganjuk</li>
+            <li>Membuat Aplikasi Mobile (Kucari) Untuk Masyarakat Nganjuk yang kehilangan barang</li>
+            <li>Membuat Aplikasi Desktop (MbahSirr) Untuk memudahkan kasir melakukan transaksi</li>
+        </ul>
+    </div>
+    
+    <div>
+        <p class="copyright">&copy; Alvian2025</p>
+    </div>
+    
+</body>
+</html>

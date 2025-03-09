@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Data Table dengan Edit</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Data Table</h2>
+        <div class="card shadow">
+            <div class="card-body">
+                <table id="example" class="display table table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="select-all"></th>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Usia</th>
+                            <th>Kota</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox" class="row-checkbox"></td>
+                            <td>1</td>
+                            <td>Alka</td>
+                            <td>25</td>
+                            <td>Jakarta</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="row-checkbox"></td>
+                            <td>2</td>
+                            <td>Atilah</td>
+                            <td>30</td>
+                            <td>Bandung</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="row-checkbox"></td>
+                            <td>3</td>
+                            <td>Evita</td>
+                            <td>28</td>
+                            <td>Surabaya</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="row-checkbox"></td>
+                            <td>4</td>
+                            <td>Nur</td>
+                            <td>32</td>
+                            <td>Yogyakarta</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="row-checkbox"></td>
+                            <td>5</td>
+                            <td>Eko</td>
+                            <td>27</td>
+                            <td>Semarang</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button id="edit-btn" class="btn btn-warning mt-3" disabled>Edit Data</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Edit -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Data</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <input type="hidden" id="editIndex">
+                        <div class="mb-3">
+                            <label for="editNama" class="form-label">Nama</label>
+                            <input type="text" class="form-control" id="editNama">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editUsia" class="form-label">Usia</label>
+                            <input type="number" class="form-control" id="editUsia">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editKota" class="form-label">Kota</label>
+                            <input type="text" class="form-control" id="editKota">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            let table = new DataTable('#example');
+
+            // Pilih semua checkbox ketika header checkbox di klik
+            $('#select-all').on('click', function () {
+                $('.row-checkbox').prop('checked', this.checked);
+                toggleEditButton();
+            });
+
+            // Jika ada perubahan di checkbox row
+            $(document).on('change', '.row-checkbox', function () {
+                if ($('.row-checkbox:checked').length === $('.row-checkbox').length) {
+                    $('#select-all').prop('checked', true);
+                } else {
+                    $('#select-all').prop('checked', false);
+                }
+                toggleEditButton();
+            });
+
+            // Aktifkan/Tidak tombol edit berdasarkan jumlah checkbox yang dipilih
+            function toggleEditButton() {
+                let checkedCount = $('.row-checkbox:checked').length;
+                $('#edit-btn').prop('disabled', checkedCount !== 1);
+            }
+
+            // Ketika tombol edit diklik, ambil data dari tabel
+            $('#edit-btn').on('click', function () {
+                let checkedRow = $('.row-checkbox:checked').closest('tr');
+                let index = checkedRow.index();
+                let nama = checkedRow.find('td:eq(2)').text();
+                let usia = checkedRow.find('td:eq(3)').text();
+                let kota = checkedRow.find('td:eq(4)').text();
+
+                $('#editIndex').val(index);
+                $('#editNama').val(nama);
+                $('#editUsia').val(usia);
+                $('#editKota').val(kota);
+
+                $('#editModal').modal('show');
+            });
+
+            // Simpan perubahan ke tabel
+            $('#editForm').on('submit', function (e) {
+                e.preventDefault();
+                let index = $('#editIndex').val();
+                let newNama = $('#editNama').val();
+                let newUsia = $('#editUsia').val();
+                let newKota = $('#editKota').val();
+
+                let row = $('#example tbody tr').eq(index);
+                row.find('td:eq(2)').text(newNama);
+                row.find('td:eq(3)').text(newUsia);
+                row.find('td:eq(4)').text(newKota);
+
+                $('#editModal').modal('hide');
+                table.draw(false);
+            });
+        });
+    </script>
+</body>
+
+</html>
